@@ -1,0 +1,384 @@
+/* Theme variables */
+:root {
+  --bg-main: #050711;
+  --bg-panel: #0e1726;
+  --bg-panel-soft: #101927;
+  --accent: #1db954;
+  --accent-soft: #21e065;
+  --text-main: #f7f9ff;
+  --text-muted: #a4b0cf;
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.6);
+  --shadow-card: 0 12px 30px rgba(0, 0, 0, 0.55);
+  --transition-fast: 150ms ease-out;
+  --transition-med: 220ms ease;
+}
+
+/* Global box sizing reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Base page layout with centered content and background */
+body {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top, #18253b 0, transparent 55%),
+    radial-gradient(circle at bottom, #04151f 0, transparent 55%),
+    var(--bg-main);
+  color: var(--text-main);
+}
+
+/* Main app container */
+.app {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 40px 60px 60px;
+}
+
+/* Header section including title and search area */
+.app-header {
+  text-align: center;
+  width: 100%;
+  margin: 0 auto 32px;
+}
+
+/* Title styling */
+.app-header h1 {
+  font-size: clamp(2.2rem, 3vw, 2.6rem);
+  letter-spacing: 0.04em;
+  margin: 0 0 8px;
+}
+
+/* Subtitle text */
+.app-header p {
+  margin: 0 0 20px;
+  color: var(--text-muted);
+  font-size: 0.98rem;
+}
+
+/* Search input + button layout */
+.search-form {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 auto 8px;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Text input for search */
+.search-form input {
+  min-width: 0;
+  width: min(900px, 100%);
+  padding: 12px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(11, 17, 31, 0.95);
+  color: var(--text-main);
+  font-size: 0.98rem;
+  outline: none;
+  transition: border-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background var(--transition-fast);
+}
+
+/* Placeholder color */
+.search-form input::placeholder {
+  color: #6f7ca0;
+}
+
+/* Input focus feedback */
+.search-form input:focus {
+  border-color: rgba(124, 144, 255, 0.7);
+  box-shadow: 0 0 0 1px rgba(124, 144, 255, 0.6);
+  background: rgba(7, 13, 26, 0.98);
+}
+
+/* Search button styling */
+.search-form button {
+  padding: 11px 22px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, var(--accent), var(--accent-soft));
+  color: #021208;
+  font-weight: 600;
+  font-size: 0.96rem;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(17, 242, 124, 0.35);
+  transition: transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    filter var(--transition-fast);
+}
+
+/* Hover animation for button */
+.search-form button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 32px rgba(17, 242, 124, 0.4);
+  filter: brightness(1.05);
+}
+
+/* Button press animation */
+.search-form button:active {
+  transform: translateY(1px);
+  box-shadow: 0 6px 16px rgba(17, 242, 124, 0.25);
+}
+
+/* Disabled button state */
+.search-form button:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+/* Error text under search */
+.error {
+  margin: 6px 0 0;
+  font-size: 0.9rem;
+  color: #ff8892;
+}
+
+/* Muted instructional text */
+.muted {
+  margin-top: 4px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Two-column layout for albums and details */
+.layout {
+  width: 100%;
+  height: calc(100vh - 220px);
+  display: grid;
+  grid-template-columns: minmax(0, 2.3fr) minmax(0, 1fr);
+  gap: 32px;
+  margin: 24px auto 0;
+}
+
+/* Panel wrappers for structure */
+.albums-panel,
+.album-details-panel {
+  width: 100%;
+}
+
+/* Shared styling for both content panels */
+.albums-section,
+.detail-section {
+  background: radial-gradient(circle at top left, #18223a 0, #0b1020 50%) padding-box;
+  border-radius: var(--radius-lg);
+  padding: 20px 20px 18px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Section titles */
+.albums-section h2,
+.detail-section h2 {
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  color: #c0c9e8;
+  margin: 0 0 14px;
+}
+
+/* Responsive grid of album cards */
+.album-grid {
+  margin-top: 4px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 18px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+/* Scrollbar styling for album grid and details */
+.album-grid::-webkit-scrollbar,
+.detail-section::-webkit-scrollbar {
+  width: 6px;
+}
+
+.album-grid::-webkit-scrollbar-thumb,
+.detail-section::-webkit-scrollbar-thumb {
+  background: rgba(140, 155, 196, 0.6);
+  border-radius: 999px;
+}
+
+/* Individual album card */
+.album-card {
+  border: none;
+  outline: none;
+  padding: 12px;
+  background: linear-gradient(145deg, #0c1222, #121a2a);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-med),
+    box-shadow var(--transition-med),
+    background var(--transition-med),
+    border-color var(--transition-med);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+}
+
+/* Hover effect for album card */
+.album-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 20px 42px rgba(0, 0, 0, 0.75);
+  background: linear-gradient(145deg, #10182b, #18233a);
+  border-color: rgba(124, 144, 255, 0.6);
+}
+
+/* Card cover image */
+.album-cover {
+  width: 100%;
+  border-radius: 14px;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+}
+
+/* Album card metadata */
+.album-meta h3 {
+  font-size: 0.95rem;
+  margin: 0 0 2px;
+}
+
+.album-meta p {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--text-muted);
+}
+
+.album-year {
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: #7b86aa;
+}
+
+/* Detail panel styling */
+.detail-section {
+  background: radial-gradient(circle at top right, #1b233b 0, #080f1c 55%);
+  overflow: hidden;
+}
+
+/* Album details header */
+.detail-header {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+/* Large album cover */
+.detail-cover {
+  width: 110px;
+  height: 110px;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.85);
+}
+
+/* Artist name in details */
+.detail-artist {
+  margin: 4px 0;
+  color: var(--text-muted);
+}
+
+/* Additional album metadata */
+.detail-meta {
+  margin: 2px 0 10px;
+  color: #8f9ac3;
+  font-size: 0.86rem;
+}
+
+/* External deezer button */
+.deezer-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(7, 19, 12, 0.9);
+  color: var(--accent-soft);
+  font-size: 0.86rem;
+  font-weight: 600;
+  text-decoration: none;
+  gap: 6px;
+}
+
+/* Track listing list */
+.track-list {
+  list-style: none;
+  padding: 10px 4px 4px;
+  margin: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+/* Individual track row */
+.track-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 4px;
+  font-size: 0.9rem;
+  border-radius: 10px;
+}
+
+/* Alternating row background */
+.track-row:nth-child(odd) {
+  background: rgba(255, 255, 255, 0.01);
+}
+
+/* Track duration element */
+.track-duration {
+  color: #9ba6cc;
+  font-size: 0.82rem;
+  margin-left: 12px;
+}
+
+/* Layout adjustment for tablet sizes */
+@media (max-width: 980px) {
+  .app {
+    padding: 24px 20px 40px;
+  }
+  .layout {
+    grid-template-columns: 1fr;
+    height: auto;
+    gap: 24px;
+  }
+}
+
+/* Layout adjustments for phones */
+@media (max-width: 640px) {
+  .search-form {
+    flex-direction: column;
+  }
+  .search-form button {
+    width: 100%;
+  }
+  .detail-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .detail-cover {
+    width: 130px;
+    height: 130px;
+  }
+}
