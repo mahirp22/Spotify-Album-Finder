@@ -95,6 +95,3 @@ This demo showcases:
 <p align="center">
   <img src="assets/albumfindergif.gif" width="1000">
 </p>
-
-   ```bash
-   npm install
