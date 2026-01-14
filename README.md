@@ -93,6 +93,6 @@ This demo showcases:
 - Responsive layout behavior
 
 <p align="center">
-  <img src="assets/albumfindergif.gif" width="1000">
+  <img src="albumfindergif.gif" width="1000">
 </p>
 
